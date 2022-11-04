@@ -1,7 +1,1 @@
 include ':app', ':filepicker'
-
-sourceControl {
-    gitRepository(new URI("https://github.com/piyushandroid701/Android-FilePicker.git")) {
-        producesModule("org.gradle.piyushandroid:filepicker")
-    }
-}

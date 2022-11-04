@@ -220,14 +220,12 @@ class FilePickerBuilder {
                             it.resources.getString(R.string.permission_filepicker_rationale),
                             Toast.LENGTH_SHORT).show()
                     return
-                }else{
-                    if (ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
+                }else if(PickerManager.isDocSupport && ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(it,
                                 it.resources.getString(R.string.permission_filepicker_rationale),
                                 Toast.LENGTH_SHORT).show()
                         return
                     }
-                }
             }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(it,
                                 FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
