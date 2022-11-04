@@ -161,7 +161,32 @@ class FilePickerBuilder {
     }
 
     private fun start(context: Activity, requestCode: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(PickerManager.showImages() && PickerManager.showVideo() && ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER_IMAGES) != PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER_VIDEOS) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(context,
+                            context.resources.getString(R.string.permission_filepicker_rationale),
+                            Toast.LENGTH_SHORT).show()
+                    return
+            }else if(PickerManager.showImages() && ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(context,
+                                context.resources.getString(R.string.permission_filepicker_rationale),
+                                Toast.LENGTH_SHORT).show()
+                        return
+            }else if(PickerManager.showVideo() && ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER_VIDEOS) != PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(context,
+                        context.resources.getString(R.string.permission_filepicker_rationale),
+                        Toast.LENGTH_SHORT).show()
+                return
+            }else{
+                if (ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(context,
+                            context.resources.getString(R.string.permission_filepicker_rationale),
+                            Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(context,
                         context.resources.getString(R.string.permission_filepicker_rationale),
@@ -178,7 +203,32 @@ class FilePickerBuilder {
 
     private fun start(fragment: Fragment, requestCode: Int) {
         fragment.context?.let {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if(PickerManager.showImages() && PickerManager.showVideo() && ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER_IMAGES) != PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER_VIDEOS) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(it,
+                            it.resources.getString(R.string.permission_filepicker_rationale),
+                            Toast.LENGTH_SHORT).show()
+                    return
+                }else if(PickerManager.showImages() && ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(it,
+                            it.resources.getString(R.string.permission_filepicker_rationale),
+                            Toast.LENGTH_SHORT).show()
+                    return
+                }else if(PickerManager.showVideo() && ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER_VIDEOS) != PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(it,
+                            it.resources.getString(R.string.permission_filepicker_rationale),
+                            Toast.LENGTH_SHORT).show()
+                    return
+                }else{
+                    if (ContextCompat.checkSelfPermission(it, FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
+                        Toast.makeText(it,
+                                it.resources.getString(R.string.permission_filepicker_rationale),
+                                Toast.LENGTH_SHORT).show()
+                        return
+                    }
+                }
+            }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(it,
                                 FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(fragment.context, it
